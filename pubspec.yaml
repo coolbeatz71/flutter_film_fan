@@ -1,0 +1,45 @@
+name: flutter_film_fan
+description: Film Fan is a new startup based in Kigali. Their vision is to become the single place for discovering and booking movies in Rwanda
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  intl:
+  flutter_bloc: ^3.2.0
+  flushbar: ^1.9.1
+  flutter_spinkit: ^4.1.2
+  cupertino_icons: ^1.0.2
+  equatable: ^1.1.0
+  auto_route: ^0.3.1
+  ff_navigation_bar: ^0.1.4
+  localstorage: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  build_runner:
+  auto_route_generator: ^0.3.2
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: fonts/Quicksand-Bold.ttf
+        - asset: fonts/Quicksand-Light.ttf
+        - asset: fonts/Quicksand-Medium.ttf
+        - asset: fonts/Quicksand-Regular.ttf
+        - asset: fonts/Quicksand-SemiBold.ttf
