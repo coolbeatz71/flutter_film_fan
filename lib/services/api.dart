@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_film_fan/constants/index.dart';
 import 'package:http/http.dart';
 
 import 'package:flutter_film_fan/helpers/api.dart';
@@ -7,87 +8,99 @@ import 'package:flutter_film_fan/models/details.dart';
 import 'package:flutter_film_fan/models/now_playing.dart';
 import 'package:flutter_film_fan/models/similar.dart';
 import 'package:flutter_film_fan/models/recommended.dart';
-
-Client client = Client();
+import 'package:flutter_film_fan/models/actors.dart';
 
 class ApiService {
-  Future<NowPlaying> getNowPlaying(String url) async {
+  Client client = Client();
+
+  Future<NowPlaying> getNowPlaying() async {
     NowPlaying nowPlaying;
-    ApiManager api = new ApiManager(url: url);
+    ApiManager api = new ApiManager(url: NOW_PLAYING_URL);
 
-    try {
-      dynamic response = await client.get(api.getUrl());
+    dynamic response = await client.get(api.getUrl());
 
-      if (response.statusCode == 200) {
-        dynamic body = response.body;
-        dynamic jsonMap = json.decode(body);
+    if (response.statusCode == 200) {
+      dynamic body = response.body;
+      dynamic jsonMap = json.decode(body);
 
-        nowPlaying = NowPlaying.fromJson(jsonMap);
-      }
-    } catch (Exception) {
+      nowPlaying = NowPlaying.fromJson(jsonMap);
       return nowPlaying;
+    } else {
+      throw Exception();
     }
-
-    return nowPlaying;
   }
 
-  Future<Details> getDetails(String url) async {
+  Future<Details> getDetails(String movieId) async {
     Details details;
-    ApiManager api = new ApiManager(url: url);
+    ApiManager api = new ApiManager(
+      url: "$MOVIE_BASE_URL/$movieId",
+    );
 
-    try {
-      dynamic response = await client.get(api.getUrl());
+    dynamic response = await client.get(api.getUrl());
 
-      if (response.statusCode == 200) {
-        dynamic body = response.body;
-        dynamic jsonMap = json.decode(body);
+    if (response.statusCode == 200) {
+      dynamic body = response.body;
+      dynamic jsonMap = json.decode(body);
 
-        details = Details.fromJson(jsonMap);
-      }
-    } catch (Exception) {
+      details = Details.fromJson(jsonMap);
       return details;
+    } else {
+      throw Exception();
     }
-
-    return details;
   }
 
-  Future<Similar> getSimilar(String url) async {
+  Future<Similar> getSimilar(String movieId) async {
     Similar similar;
-    ApiManager api = new ApiManager(url: url);
+    ApiManager api = new ApiManager(
+      url: "$MOVIE_BASE_URL/$movieId/similar",
+    );
 
-    try {
-      dynamic response = await client.get(api.getUrl());
+    dynamic response = await client.get(api.getUrl());
 
-      if (response.statusCode == 200) {
-        dynamic body = response.body;
-        dynamic jsonMap = json.decode(body);
+    if (response.statusCode == 200) {
+      dynamic body = response.body;
+      dynamic jsonMap = json.decode(body);
 
-        similar = Similar.fromJson(jsonMap);
-      }
-    } catch (Exception) {
+      similar = Similar.fromJson(jsonMap);
       return similar;
+    } else {
+      throw Exception();
     }
-
-    return similar;
   }
 
-  Future<Recommended> getRecommended(String url) async {
+  Future<Recommended> getRecommended(String movieId) async {
     Recommended recommended;
-    ApiManager api = new ApiManager(url: url);
+    ApiManager api = new ApiManager(
+      url: "$MOVIE_BASE_URL/$movieId/recommendations",
+    );
 
-    try {
-      dynamic response = await client.get(api.getUrl());
+    dynamic response = await client.get(api.getUrl());
 
-      if (response.statusCode == 200) {
-        dynamic body = response.body;
-        dynamic jsonMap = json.decode(body);
+    if (response.statusCode == 200) {
+      dynamic body = response.body;
+      dynamic jsonMap = json.decode(body);
 
-        recommended = Recommended.fromJson(jsonMap);
-      }
-    } catch (Exception) {
+      recommended = Recommended.fromJson(jsonMap);
       return recommended;
+    } else {
+      throw Exception();
     }
+  }
 
-    return recommended;
+  Future<Actors> getActors(String movieId) async {
+    Actors actors;
+    ApiManager api = new ApiManager(url: "$MOVIE_BASE_URL/$movieId/credits");
+
+    dynamic response = await client.get(api.getUrl());
+
+    if (response.statusCode == 200) {
+      dynamic body = response.body;
+      dynamic jsonMap = json.decode(body);
+
+      actors = Actors.fromJson(jsonMap);
+      return actors;
+    } else {
+      throw Exception();
+    }
   }
 }

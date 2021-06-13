@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
-
-const API_KEY = "49293f4edb9812c1b86990775a8";
-const BASE_URL = "https://api.themoviedb.org/3/";
+import 'package:flutter_film_fan/constants/index.dart';
 
 class ApiManager {
   String url;
