@@ -18,7 +18,6 @@ class ApiService {
     ApiManager api = new ApiManager(url: NOW_PLAYING_URL);
 
     dynamic response = await client.get(api.getUrl());
-
     if (response.statusCode == 200) {
       dynamic body = response.body;
       dynamic jsonMap = json.decode(body);
@@ -26,7 +25,10 @@ class ApiService {
       nowPlaying = NowPlaying.fromJson(jsonMap);
       return nowPlaying;
     } else {
-      throw Exception();
+      dynamic err = json.decode(response.body);
+      String message = err["status_message"];
+
+      throw Exception(message);
     }
   }
 
