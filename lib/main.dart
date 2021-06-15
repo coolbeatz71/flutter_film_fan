@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_film_fan/bloc/now_playing/bloc.dart';
+
+import 'package:flutter_film_fan/helpers/colors.dart';
+import 'package:flutter_film_fan/views/pages/now_playing.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -6,47 +11,13 @@ void main() async {
     MaterialApp(
       theme: ThemeData(
         canvasColor: Colors.transparent,
-        primaryColor: Colors.pinkAccent.shade400,
+        primaryColor: AppColors.primary,
       ),
       debugShowCheckedModeBanner: false,
-      home: MyApp(),
+      home: BlocProvider(
+        create: (context) => NowPlayingBloc(),
+        child: NowPlaying(),
+      ),
     ),
   );
-}
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Size _screenSize = MediaQuery.of(context).size;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Film fan"),
-        centerTitle: true,
-        elevation: 5,
-      ),
-      body: Container(
-        width: _screenSize.width,
-        height: _screenSize.height,
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

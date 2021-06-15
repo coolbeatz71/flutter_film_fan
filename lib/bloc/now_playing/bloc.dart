@@ -10,7 +10,7 @@ part 'event.dart';
 part 'state.dart';
 
 class NowPlayingBloc extends Bloc<NowPlayingEvent, NowPlayingState> {
-  ApiService service;
+  ApiService service = ApiService();
 
   NowPlayingState get initialState => NowPlayingLoading();
 
@@ -23,7 +23,7 @@ class NowPlayingBloc extends Bloc<NowPlayingEvent, NowPlayingState> {
         NowPlaying data = await service.getNowPlaying();
         yield NowPlayingSuccess(data: data);
       } catch (e) {
-        yield NowPlayingFail(message: "Fail to fecth movies");
+        yield NowPlayingFail(message: e.message);
       }
     }
   }
