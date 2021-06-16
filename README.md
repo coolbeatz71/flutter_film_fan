@@ -4,7 +4,10 @@ Film Fan is a new startup based in Kigali. Their vision is to become the single 
 
 # How to test?
 
-Download the APK at this [link](app.apk)
+Download the **release-version** APK at this [link](app.apk).
+In case the above APK is not opening, it may be causing by a wrong APK signature.
+
+Don't worry, as you can still use the **debug-version** at this [link](app-debug.apk)
 
 # Screenshot
 
