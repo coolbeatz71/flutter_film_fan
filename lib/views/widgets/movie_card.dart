@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_film_fan/bloc/actors/bloc.dart';
+import 'package:flutter_film_fan/bloc/details/bloc.dart';
 import 'package:flutter_film_fan/views/pages/details.dart';
 import 'package:intl/intl.dart';
 
@@ -9,6 +12,7 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 class MovieCard extends StatelessWidget {
   final int id;
   final String poster;
+  final String backdrop;
   final String title;
   final DateTime releaseDate;
   final double voteAverage;
@@ -17,8 +21,9 @@ class MovieCard extends StatelessWidget {
   const MovieCard({
     Key key,
     @required this.id,
-    @required this.poster,
     @required this.title,
+    @required this.poster,
+    @required this.backdrop,
     @required this.releaseDate,
     @required this.voteAverage,
     @required this.voteCount,
@@ -34,13 +39,24 @@ class MovieCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Details(
-              id: id,
-              title: title,
-              poster: poster,
-              releaseDate: releaseDate,
-              voteAverage: voteAverage,
-              voteCount: voteCount,
+            builder: (context) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => DetailsBloc(),
+                ),
+                BlocProvider(
+                  create: (context) => ActorsBloc(),
+                )
+              ],
+              child: Details(
+                id: id,
+                title: title,
+                poster: poster,
+                backdrop: backdrop,
+                releaseDate: releaseDate,
+                voteAverage: voteAverage,
+                voteCount: voteCount,
+              ),
             ),
           ),
         );
@@ -120,7 +136,6 @@ class MovieCard extends StatelessWidget {
                         Row(
                           children: [
                             Chip(
-                              // labelPadding: EdgeInsets.all(0.5),
                               visualDensity: VisualDensity(
                                 horizontal: 0.0,
                                 vertical: -4.0,
@@ -153,7 +168,7 @@ class MovieCard extends StatelessWidget {
                               child: SmoothStarRating(
                                 allowHalfRating: true,
                                 starCount: 5,
-                                rating: voteAverage,
+                                rating: voteAverage / 2,
                                 size: 15.0,
                                 isReadOnly: true,
                                 color: Colors.amber.shade300,
