@@ -8,6 +8,6 @@ class ApiManager {
   ApiManager({@required this.url, this.sessionId});
 
   String getUrl() {
-    return "$BASE_URL${this.url}?api_key=$API_KEY${this.sessionId != null ? '&guest_session_id=this.sessionId' : ''}";
+    return "$BASE_URL${this.url}?api_key=$API_KEY${this.sessionId != null ? '&guest_session_id=${this.sessionId}' : ''}";
   }
 }

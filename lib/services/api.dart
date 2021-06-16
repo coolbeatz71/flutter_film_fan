@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_film_fan/constants/index.dart';
 import 'package:flutter_film_fan/models/guest_session.dart';
+import 'package:flutter_film_fan/models/rating.dart';
 import 'package:http/http.dart';
 
 import 'package:flutter_film_fan/helpers/api.dart';
@@ -111,7 +112,6 @@ class ApiService {
   Future<GuestSession> generateGuestSession() async {
     GuestSession guest;
     ApiManager api = new ApiManager(url: "authentication/guest_session/new");
-    print(api.getUrl());
 
     dynamic response = await client.post(api.getUrl());
 
@@ -124,31 +124,32 @@ class ApiService {
         "guest-session",
         guest.guestSessionId,
       );
-      print(guest.guestSessionId);
       return guest;
     } else {
-      print(guest);
       throw Exception();
     }
   }
 
-  Future<Actors> rateMovie(int movieId, double value) async {
+  Future<Rating> rateMovie(int movieId, double value) async {
     String sessionId = LocalStorage("guest_session").getItem("guest-session");
 
-    Actors actors;
+    Rating rating;
     ApiManager api = new ApiManager(
       url: "$MOVIE_BASE_URL/$movieId/rating",
       sessionId: sessionId,
     );
 
-    dynamic response = await client.post(api.getUrl(), body: {value: value});
+    dynamic response = await client.post(
+      api.getUrl(),
+      body: {"value": value.toString()},
+    );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       dynamic body = response.body;
       dynamic jsonMap = json.decode(body);
 
-      actors = Actors.fromJson(jsonMap);
-      return actors;
+      rating = Rating.fromJson(jsonMap);
+      return rating;
     } else {
       throw Exception();
     }

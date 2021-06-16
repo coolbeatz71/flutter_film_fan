@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_film_fan/bloc/rating/bloc.dart';
 import 'package:flutter_film_fan/helpers/colors.dart';
+import 'package:flutter_film_fan/views/widgets/rate_movie.dart';
 
 class BottomSheetContainer extends StatelessWidget {
   final int movieId;
@@ -18,10 +21,12 @@ class BottomSheetContainer extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(
+            Radius.circular(6.0),
+          ),
         ),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12.0),
           child: Column(
             children: <Widget>[
               Container(
@@ -29,17 +34,7 @@ class BottomSheetContainer extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Flexible(
-                      child: Text(
-                        'Task form',
-                        style: TextStyle(
-                          color: AppColors.darkGrey,
-                          fontSize: 20,
-                          fontFamily: 'Open Sans',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
+                    Flexible(child: Container()),
                     Flexible(
                       child: InkWell(
                         child: Theme(
@@ -63,10 +58,10 @@ class BottomSheetContainer extends StatelessWidget {
                   ],
                 ),
               ),
-              // BlocProvider(
-              //   create: (context) => TaskBloc(),
-              //   child: TaskForm(task: task),
-              // ),
+              BlocProvider(
+                create: (context) => RatingBloc(),
+                child: RateMovie(movieId: movieId),
+              ),
             ],
           ),
         ),

@@ -24,13 +24,13 @@ class _NowPlayingState extends State<NowPlaying> {
   @override
   void initState() {
     super.initState();
-    service.generateGuestSession();
     _nowPlayingBloc = BlocProvider.of<NowPlayingBloc>(context);
     _nowPlayingBloc.add(GetNowPlayingEvent());
   }
 
   @override
   Widget build(BuildContext context) {
+    service.generateGuestSession();
     return Builder(
       builder: (context) {
         return Container(
