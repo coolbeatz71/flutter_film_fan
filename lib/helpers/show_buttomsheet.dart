@@ -17,12 +17,11 @@ class Utils {
   static void showToast({
     @required String message,
     bool success = true,
-    toastGravity = ToastGravity.BOTTOM,
   }) {
     FlutterFlexibleToast.showToast(
       message: message,
       toastLength: Toast.LENGTH_LONG,
-      toastGravity: toastGravity,
+      toastGravity: ToastGravity.BOTTOM,
       icon: ICON.SUCCESS,
       radius: 10,
       elevation: 0,

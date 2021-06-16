@@ -23,7 +23,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
         Rating data = await service.rateMovie(event.id, event.value);
         yield RatingSuccess(data: data);
       } catch (e) {
-        yield RatingFail(message: e.status_message);
+        yield RatingFail(message: e.message);
       }
     }
   }

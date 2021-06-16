@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_film_fan/bloc/rating/bloc.dart';
 import 'package:flutter_film_fan/helpers/colors.dart';
 import 'package:flutter_film_fan/helpers/show_buttomsheet.dart';
-import 'package:flutter_flexible_toast/flutter_flexible_toast.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
@@ -66,12 +65,13 @@ class _RateMovieState extends State<RateMovie> {
 
                   Utils.showToast(message: state.data.statusMessage);
                 } else if (state is RatingFail) {
+                  Navigator.of(context).pop();
                   setState(() {
                     _isButtonDisabled = true;
                   });
                   Utils.showToast(
-                    toastGravity: ToastGravity.TOP,
-                    message: state.message,
+                    success: false,
+                    message: "An error occurred when trying to rate",
                   );
                 }
               },

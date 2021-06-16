@@ -143,7 +143,6 @@ class ApiService {
       api.getUrl(),
       body: {"value": value.toString()},
     );
-
     if (response.statusCode == 200 || response.statusCode == 201) {
       dynamic body = response.body;
       dynamic jsonMap = json.decode(body);
