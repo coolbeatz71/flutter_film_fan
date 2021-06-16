@@ -32,7 +32,7 @@ class ApiService {
     }
   }
 
-  Future<Details> getDetails(String movieId) async {
+  Future<Details> getDetails(int movieId) async {
     Details details;
     ApiManager api = new ApiManager(
       url: "$MOVIE_BASE_URL/$movieId",
@@ -89,7 +89,7 @@ class ApiService {
     }
   }
 
-  Future<Actors> getActors(String movieId) async {
+  Future<Actors> getActors(int movieId) async {
     Actors actors;
     ApiManager api = new ApiManager(url: "$MOVIE_BASE_URL/$movieId/credits");
 

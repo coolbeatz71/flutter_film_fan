@@ -35,7 +35,7 @@ class Details {
 
   bool adult;
   String backdropPath;
-  BelongsToCollection belongsToCollection;
+  dynamic belongsToCollection;
   int budget;
   List<Genre> genres;
   String homepage;
@@ -62,9 +62,7 @@ class Details {
   factory Details.fromJson(Map<String, dynamic> json) => Details(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
-        belongsToCollection: BelongsToCollection.fromJson(
-          json["belongs_to_collection"],
-        ),
+        belongsToCollection: json["belongs_to_collection"],
         budget: json["budget"],
         genres: List<Genre>.from(
           json["genres"].map(
@@ -108,7 +106,7 @@ class Details {
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
-        "belongs_to_collection": belongsToCollection.toJson(),
+        "belongs_to_collection": belongsToCollection,
         "budget": budget,
         "genres": List<dynamic>.from(
           genres.map(
@@ -151,35 +149,6 @@ class Details {
       };
 }
 
-class BelongsToCollection {
-  BelongsToCollection({
-    this.id,
-    this.name,
-    this.posterPath,
-    this.backdropPath,
-  });
-
-  int id;
-  String name;
-  dynamic posterPath;
-  dynamic backdropPath;
-
-  factory BelongsToCollection.fromJson(Map<String, dynamic> json) =>
-      BelongsToCollection(
-        id: json["id"],
-        name: json["name"],
-        posterPath: json["poster_path"],
-        backdropPath: json["backdrop_path"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "poster_path": posterPath,
-        "backdrop_path": backdropPath,
-      };
-}
-
 class Genre {
   Genre({
     this.id,
@@ -216,14 +185,14 @@ class ProductionCompany {
   factory ProductionCompany.fromJson(Map<String, dynamic> json) =>
       ProductionCompany(
         id: json["id"],
-        logoPath: json["logo_path"],
+        logoPath: json["logo_path"] == null ? null : json["logo_path"],
         name: json["name"],
         originCountry: json["origin_country"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "logo_path": logoPath,
+        "logo_path": logoPath == null ? null : logoPath,
         "name": name,
         "origin_country": originCountry,
       };

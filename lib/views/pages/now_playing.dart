@@ -154,6 +154,7 @@ class _NowPlayingState extends State<NowPlaying> {
                             Result res = state.data.results[index];
 
                             String poster = "$POSTER_URL${res.posterPath}";
+                            String backdrop = "$POSTER_URL${res.backdropPath}";
                             String title = res.originalTitle;
                             DateTime releaseDate = res.releaseDate;
                             double voteAverage = res.voteAverage;
@@ -170,9 +171,10 @@ class _NowPlayingState extends State<NowPlaying> {
                                   id: movieId,
                                   title: title,
                                   poster: poster,
+                                  backdrop: backdrop,
+                                  voteCount: voteCount,
                                   releaseDate: releaseDate,
                                   voteAverage: voteAverage,
-                                  voteCount: voteCount,
                                 ),
                               ),
                             );
