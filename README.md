@@ -13,16 +13,13 @@ Don't worry, as you can still use the **debug-version** at this [link](app-debug
 
 ### Now playing
 
-![alt text](screenshot/now_playing.jpg)
+<img src="screenshot/now_playing.jpg" width="320">
 
 ### Details page
-
-![alt text](screenshot/details.jpg)
+<img src="screenshot/details.jpg" width="320">
 
 ### recommend/similar/actor section
-
-![alt text](screenshot/recommended.jpg)
+<img src="screenshot/recommended.jpg" width="320">
 
 ### Rating form
-
-![alt text](screenshot/rating.jpg)
+<img src="screenshot/rating.jpg" width="320">
