@@ -131,7 +131,8 @@ class ApiService {
   }
 
   Future<Rating> rateMovie(int movieId, double value) async {
-    String sessionId = LocalStorage("guest_session").getItem("guest-session");
+    String sessionId =
+        LocalStorage("guest_session").getItem("guest-session") ?? SESSION_ID;
 
     Rating rating;
     ApiManager api = new ApiManager(
@@ -143,6 +144,7 @@ class ApiService {
       api.getUrl(),
       body: {"value": value.toString()},
     );
+    print(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       dynamic body = response.body;
       dynamic jsonMap = json.decode(body);
