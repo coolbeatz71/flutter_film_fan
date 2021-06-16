@@ -51,7 +51,7 @@ class ApiService {
     }
   }
 
-  Future<Similar> getSimilar(String movieId) async {
+  Future<Similar> getSimilar(int movieId) async {
     Similar similar;
     ApiManager api = new ApiManager(
       url: "$MOVIE_BASE_URL/$movieId/similar",
@@ -70,7 +70,7 @@ class ApiService {
     }
   }
 
-  Future<Recommended> getRecommended(String movieId) async {
+  Future<Recommended> getRecommended(int movieId) async {
     Recommended recommended;
     ApiManager api = new ApiManager(
       url: "$MOVIE_BASE_URL/$movieId/recommendations",
