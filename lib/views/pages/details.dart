@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_film_fan/bloc/actors/bloc.dart';
 import 'package:flutter_film_fan/bloc/details/bloc.dart';
 import 'package:flutter_film_fan/helpers/colors.dart';
+import 'package:flutter_film_fan/helpers/show_buttomsheet.dart';
 import 'package:flutter_film_fan/views/widgets/actors_list.dart';
 import 'package:flutter_film_fan/views/widgets/shared/error_msg.dart';
 import 'package:flutter_film_fan/views/widgets/tabs/bottom.dart';
@@ -98,7 +99,7 @@ class _DetailsState extends State<Details> {
                         fontSize: 25,
                       ),
                     ),
-                    expandedHeight: 420.0,
+                    expandedHeight: 480.0,
                     backgroundColor: AppColors.primary,
                     leading: IconButton(
                       icon: Icon(
@@ -179,7 +180,7 @@ class _DetailsState extends State<Details> {
                                         fontSize: 32,
                                       ),
                                     ),
-                                    SizedBox(height: 14.0),
+                                    SizedBox(height: 18.0),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -241,7 +242,7 @@ class _DetailsState extends State<Details> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 12.0),
+                                    SizedBox(height: 6.0),
                                     Container(
                                       child: SmoothStarRating(
                                         allowHalfRating: true,
@@ -254,6 +255,26 @@ class _DetailsState extends State<Details> {
                                         spacing: 1.5,
                                       ),
                                     ),
+                                    SizedBox(height: 12.0),
+                                    MaterialButton(
+                                      color: AppColors.primary,
+                                      onPressed: () {
+                                        Utils.showBottomSheet(
+                                          context,
+                                          widget.id,
+                                        );
+                                      },
+                                      child: Text(
+                                        "Rate the movie",
+                                        style: TextStyle(
+                                          height: 1,
+                                          fontFamily: "Quicksand",
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),

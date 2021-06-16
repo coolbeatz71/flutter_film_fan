@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_film_fan/constants/index.dart';
+import 'package:flutter_film_fan/models/guest_session.dart';
+import 'package:flutter_film_fan/models/rating.dart';
 import 'package:http/http.dart';
 
 import 'package:flutter_film_fan/helpers/api.dart';
@@ -9,6 +11,7 @@ import 'package:flutter_film_fan/models/now_playing.dart';
 import 'package:flutter_film_fan/models/similar.dart';
 import 'package:flutter_film_fan/models/recommended.dart';
 import 'package:flutter_film_fan/models/actors.dart';
+import 'package:localstorage/localstorage.dart';
 
 class ApiService {
   Client client = Client();
@@ -101,6 +104,51 @@ class ApiService {
 
       actors = Actors.fromJson(jsonMap);
       return actors;
+    } else {
+      throw Exception();
+    }
+  }
+
+  Future<GuestSession> generateGuestSession() async {
+    GuestSession guest;
+    ApiManager api = new ApiManager(url: "authentication/guest_session/new");
+
+    dynamic response = await client.post(api.getUrl());
+
+    if (response.statusCode == 200) {
+      dynamic body = response.body;
+      dynamic jsonMap = json.decode(body);
+
+      guest = GuestSession.fromJson(jsonMap);
+      LocalStorage("guest_session").setItem(
+        "guest-session",
+        guest.guestSessionId,
+      );
+      return guest;
+    } else {
+      throw Exception();
+    }
+  }
+
+  Future<Rating> rateMovie(int movieId, double value) async {
+    String sessionId = LocalStorage("guest_session").getItem("guest-session");
+
+    Rating rating;
+    ApiManager api = new ApiManager(
+      url: "$MOVIE_BASE_URL/$movieId/rating",
+      sessionId: sessionId,
+    );
+
+    dynamic response = await client.post(
+      api.getUrl(),
+      body: {"value": value.toString()},
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      dynamic body = response.body;
+      dynamic jsonMap = json.decode(body);
+
+      rating = Rating.fromJson(jsonMap);
+      return rating;
     } else {
       throw Exception();
     }
