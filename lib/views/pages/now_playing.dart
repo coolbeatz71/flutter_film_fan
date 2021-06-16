@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_film_fan/constants/index.dart';
 import 'package:flutter_film_fan/helpers/colors.dart';
 import 'package:flutter_film_fan/models/now_playing.dart';
+import 'package:flutter_film_fan/services/api.dart';
 import 'package:flutter_film_fan/views/widgets/movie_card.dart';
 import 'package:flutter_film_fan/views/widgets/shared/error_msg.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -18,9 +19,12 @@ class _NowPlayingState extends State<NowPlaying> {
   double topHeight = 0.0;
   NowPlayingBloc _nowPlayingBloc;
 
+  ApiService service = ApiService();
+
   @override
   void initState() {
     super.initState();
+    service.generateGuestSession();
     _nowPlayingBloc = BlocProvider.of<NowPlayingBloc>(context);
     _nowPlayingBloc.add(GetNowPlayingEvent());
   }

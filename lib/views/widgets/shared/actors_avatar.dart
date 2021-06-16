@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_film_fan/constants/index.dart';
 import 'package:flutter_film_fan/helpers/colors.dart';
-import 'package:flutter_film_fan/helpers/nameInitials.dart';
+import 'package:flutter_film_fan/helpers/name_initials.dart';
 import 'package:flutter_film_fan/models/actors.dart';
 
 class ActorsAvatar extends StatelessWidget {
